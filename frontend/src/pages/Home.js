@@ -8,27 +8,58 @@ const Home = () => {
 
   const loadRecipes = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/recipes');
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.error('No token found');
+        return;
+      }
+
+      const response = await fetch('http://localhost:5000/api/recipes', {
+        headers: { 
+          'Authorization': `Bearer ${token}`
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
       const data = await response.json();
-      setRecipes(data);
+      setRecipes(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error('Error fetching recipes:', error);
+      setRecipes([]); // Ensure state remains an array
     }
   };
 
   const handleRecipeAdded = async (newRecipe) => {
-    console.log('Adding new recipe:', newRecipe); // Debug: Log the new recipe
     try {
+      const token = localStorage.getItem('token');
+  
+      if (!token) {
+        console.error('No token found. User is not authenticated.');
+        return;
+      }
+  
       const response = await fetch('http://localhost:5000/api/recipes', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify(newRecipe),
       });
+  
+      if (!response.ok) {
+        const errorMessage = await response.json();
+        throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorMessage.message}`);
+      }
+  
       const data = await response.json();
-      console.log('Recipe added successfully:', data);
-      setRecipes((prevRecipes) => [...prevRecipes, data]); // Update the recipe list
+      console.log('AI Recipe added successfully:', data);
+      setRecipes((prevRecipes) => [...prevRecipes, data]);
     } catch (error) {
-      console.error('Error adding recipe:', error);
+      console.error('Error adding AI-generated recipe:', error);
     }
   };
   
@@ -41,7 +72,7 @@ const Home = () => {
     <div className="container mt-4">
       <AddRecipe onRecipeAdded={handleRecipeAdded} />
       <RecipeList recipes={recipes} onRefresh={loadRecipes} />
-      <RecipeAI onRecipeAdded={handleRecipeAdded} /> {/* Add AI component */}
+      <RecipeAI onRecipeAdded={handleRecipeAdded} />
     </div>
   );
 };

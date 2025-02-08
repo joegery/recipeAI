@@ -11,7 +11,7 @@ const RecipeModal = ({ recipe, onClose, onUpdate }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdate(updatedRecipe); // Trigger the update function
+    onUpdate(updatedRecipe);
     setIsEditing(false); // Exit edit mode after updating
   };
 

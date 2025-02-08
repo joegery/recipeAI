@@ -1,70 +1,93 @@
-# Getting Started with Create React App
+# MERN Stack Recipe App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack **MERN Recipe App** that allows users to **create, update, delete, and generate recipes using AI**. Features **JWT authentication**, user-specific recipes, and image generation with OpenAI's DALL·E.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features
+- 🔑 **User Authentication (Signup/Login/Logout)**
+- 📜 **CRUD Operations**
+- 🤖 **AI Recipe Generation (GPT-4o + DALL·E Image Generation)**
+- 🖼️ **Custom Recipe Images**
+- 🛠️ **Protected API Routes with JWT**
+- 🎨 **Bootstrap-based UI**
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech Stack
+- **Frontend:** React, Bootstrap
+- **Backend:** Node.js, Express, MongoDB
+- **Authentication:** JWT
+- **AI Integration:** OpenAI GPT-4o, DALL·E
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Setup Instructions
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1️⃣ Clone the Repository
 
-### `npm run build`
+```
+git clone https://github.com/joegery/recipes.git
+cd recipes
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+🔹 Backend Setup
+📂 Navigate to Backend
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+cd backend
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+📌 Install Dependencies
 
-### `npm run eject`
+```
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Create a .env file in backend folder with this format, fill it out with your corresponding information, you will have to make a MongoDB database and create a connection string. You will also have to use your own OpenAI API key
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+OPENAI_API_KEY=your_openai_api_key
+PORT=5000
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+▶️ Start the Backend
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+npm start
+```
 
-## Learn More
+The backend will start on http://localhost:5000.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+🔹 Frontend Setup
+📂 Navigate to Frontend
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+cd ../frontend
+```
 
-### Code Splitting
+📌 Install Dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+npm install
+```
 
-### Analyzing the Bundle Size
+▶️ Start the Frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+npm start
+```
 
-### Making a Progressive Web App
+The frontend will start on http://localhost:3000.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+🔑 Authentication
+Sign up on the login page.
+Login with the created account.
+Token-based authentication ensures users can only access their own recipes.
+Logout button allows users to clear their session.
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+🤖 AI Recipe Generation
+Click "Generate Recipe with AI".
+Enter a recipe idea (e.g., "Spaghetti Bolognese").
+AI will generate a recipe with a generated image.
+The recipe is saved to your account.

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const RecipeAI = ({ onRecipeAdded }) => {
-  const [showAIBox, setShowAIBox] = useState(false); // Toggle for AI box
+  const [showAIBox, setShowAIBox] = useState(false);
   const [prompt, setPrompt] = useState('');
   const [status, setStatus] = useState('');
 
@@ -9,17 +9,41 @@ const RecipeAI = ({ onRecipeAdded }) => {
     setShowAIBox((prev) => !prev);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    window.location.reload();
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('Generating recipe...');
+  
     try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setStatus('Error: User not authenticated');
+        console.error('No token found, AI request unauthorized.');
+        return;
+      }
+  
       const response = await fetch('http://localhost:5000/api/recipes/generate-recipe', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
         body: JSON.stringify({ prompt }),
       });
+  
+      if (!response.ok) {
+        const errorMessage = await response.json();
+        throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorMessage.message}`);
+      }
+  
       const data = await response.json();
-      onRecipeAdded(data); // Add the generated recipe to the list
+      console.log('AI Recipe Generated Successfully:', data);
+  
+      onRecipeAdded(data);
       setStatus('Recipe generated successfully!');
       setPrompt('');
     } catch (error) {
@@ -33,9 +57,16 @@ const RecipeAI = ({ onRecipeAdded }) => {
       <button
         className="btn btn-info mb-3"
         onClick={handleToggleAIBox}
-        style={{ position: 'fixed', top: '20px', right: '20px', zIndex: 1000 }}
+        style={{ position: 'fixed', top: '20px', right: '120px', zIndex: 1000 }}
       >
         {showAIBox ? 'Close AI' : 'Generate Recipe with AI'}
+      </button>
+      <button
+        className="btn btn-danger mb-3"
+        onClick={handleLogout}
+        style={{ position: 'fixed', top: '20px', right: '20px', zIndex: 1000 }}
+      >
+        Logout
       </button>
       {showAIBox && (
         <div
