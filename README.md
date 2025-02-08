@@ -5,6 +5,7 @@ A full-stack **MERN Recipe App** that allows users to **create, update, delete, 
 ---
 
 ## Features
+
 - 🔑 **User Authentication (Signup/Login/Logout)**
 - 📜 **CRUD Operations**
 - 🤖 **AI Recipe Generation (GPT-4o + DALL·E Image Generation)**
@@ -15,6 +16,7 @@ A full-stack **MERN Recipe App** that allows users to **create, update, delete, 
 ---
 
 ## Tech Stack
+
 - **Frontend:** React, Bootstrap
 - **Backend:** Node.js, Express, MongoDB
 - **Authentication:** JWT
@@ -32,6 +34,7 @@ cd recipeAI
 ```
 
 🔹 Backend Setup
+
 📂 Navigate to Backend
 
 ```
@@ -60,6 +63,7 @@ npm start
 The backend will start on http://localhost:5000.
 
 🔹 Frontend Setup
+
 📂 Navigate to Frontend
 
 ```
@@ -81,12 +85,14 @@ npm start
 The frontend will start on http://localhost:3000.
 
 🔑 Authentication
+
 Sign up on the login page.
 Login with the created account.
 Token-based authentication ensures users can only access their own recipes.
 Logout button allows users to clear their session.
 
 🤖 AI Recipe Generation
+
 Click "Generate Recipe with AI".
 Enter a recipe idea (e.g., "Spaghetti Bolognese").
 AI will generate a recipe with a generated image.
