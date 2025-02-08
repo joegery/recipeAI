@@ -27,8 +27,8 @@ A full-stack **MERN Recipe App** that allows users to **create, update, delete, 
 ### 1️⃣ Clone the Repository
 
 ```
-git clone https://github.com/joegery/recipes.git
-cd recipes
+git clone https://github.com/joegery/recipeAI.git
+cd recipeAI
 ```
 
 🔹 Backend Setup
