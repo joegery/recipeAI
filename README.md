@@ -49,10 +49,12 @@ npm install
 
 Create a .env file in backend folder with this format, fill it out with your corresponding information, you will have to make a MongoDB database and create a connection string. You will also have to use your own OpenAI API key
 
+```
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 OPENAI_API_KEY=your_openai_api_key
 PORT=5000
+```
 
 ▶️ Start the Backend
 
